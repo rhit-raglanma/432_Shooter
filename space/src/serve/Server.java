@@ -23,6 +23,8 @@ public class Server {
 			players.add(new Player(i));
 		}
 		
+		int[][] shootQueue = new int[10][10];
+		
 		
 		while (true) {
 			
