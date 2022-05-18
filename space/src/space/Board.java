@@ -37,6 +37,9 @@ public class Board extends JPanel implements ActionListener {
     
     public Board() throws Exception {
     	
+//    	String thisIPString = InetAddress.getLocalHost().getHostAddress();
+//		System.out.println(thisIPString);
+    	
     	Scanner myScanner = new Scanner(System.in);
     	
     	System.out.println("Enter your ip: ");
@@ -50,6 +53,8 @@ public class Board extends JPanel implements ActionListener {
     	int playerNum;
 		
 		DatagramSocket ds = new DatagramSocket();
+		
+		
 		
 		//RHIT-R90Y2R7N/192.168.56.1
 		
