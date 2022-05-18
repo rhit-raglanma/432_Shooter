@@ -49,7 +49,7 @@ public class Board extends JPanel implements ActionListener {
 		byte[] b = "NEW".getBytes();
 		//this.ia= InetAddress.getByAddress("137.112.230.174".getBytes());
 		//this.ia = InetAddress.getLocalHost();
-		this.ia = InetAddress.getByName("RHIT-R90Y2R7N");
+		this.ia = InetAddress.getByName("192.168.56.1");
 		System.out.println(this.ia);
 		DatagramPacket dp = new DatagramPacket(b,b.length, ia, 6000);
 		System.out.println("Sending..");
