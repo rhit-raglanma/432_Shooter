@@ -15,7 +15,7 @@ public class Server {
 		
 		DatagramSocket ds = new DatagramSocket(6000);
 		
-		byte[] b1 = new byte[14];
+		byte[] b1 = new byte[25];
 		
 		String[] ips = new String[10];
 		
@@ -46,7 +46,7 @@ public class Server {
 			//count += num;
 			//System.out.println("Count: " + count);
 			
-			System.out.println("received: " + str);
+			//System.out.println("received: " + str);
 			
 			if (str.substring(0, 3).equals("NEW")) {
 				
@@ -159,8 +159,8 @@ public class Server {
 			//InetAddress ia = InetAddress.getLocalHost();
 			
 			InetAddress ia = InetAddress.getByName(ips[p]);
-			System.out.println(ia);
-			System.out.println(ips[playerCount]);
+			//System.out.println(ia);
+			//System.out.println(ips[playerCount]);
 			DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
 			ds.send(dp1);
 			
