@@ -151,7 +151,7 @@ public class Board extends JPanel implements ActionListener {
         	
         }
         
-        System.out.println(missiles.size());
+        //System.out.println(missiles.size());
     	
     	return missiles;
     }
@@ -215,7 +215,7 @@ public class Board extends JPanel implements ActionListener {
 		ds.receive(dp1);
 		long endTime = System.nanoTime();
 		
-		System.out.println((endTime - startTime)/1000000);
+		//System.out.println((endTime - startTime)/1000000);
 		
 		String position = new String(dp1.getData());
 		

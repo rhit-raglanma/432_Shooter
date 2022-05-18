@@ -55,6 +55,10 @@ public class Server {
 				
 //				players.add(new Player(playerCount));
 				
+				for (int i = 0; i < 10; i++) {
+					shootQueue[i][playerCount] = 0;
+				}
+				
 				
 				
 				byte[] b2 = (playerCount + "").getBytes();
@@ -71,6 +75,13 @@ public class Server {
 			int p = Integer.parseInt(str.substring(0, 1));
 			
 			players.get(p).move(str.substring(1));
+			
+			
+			if (str.charAt(5) == '1') {
+				for (int i = 0; i < 10; i++) {
+					shootQueue[p][i] += 1;
+				}
+			}
 			
 			
 			//X,Y
@@ -92,11 +103,21 @@ public class Server {
 			for (int i = 0; i < 10; i++) {
 				sendString = sendString.concat(String.format("%03d", players.get(i).x));
 				sendString = sendString.concat(String.format("%03d", players.get(i).y));
-				if (players.get(i).firing) {
+				
+				
+				if (shootQueue[i][p] > 0) {
 					sendString = sendString.concat("1");
+					shootQueue[i][p]--;
 				} else {
 					sendString = sendString.concat("0");
 				}
+				
+				
+//				if (players.get(i).firing) {
+//					sendString = sendString.concat("1");
+//				} else {
+//					sendString = sendString.concat("0");
+//				}
 				
 			}
 			
