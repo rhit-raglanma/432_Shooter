@@ -42,10 +42,15 @@ public class Board extends JPanel implements ActionListener {
 		
 		DatagramSocket ds = new DatagramSocket();
 		
+		//RHIT-R90Y2R7N/192.168.56.1
+		
 //		int i = -4;
 //		byte[] b = String.valueOf(i).getBytes();
 		byte[] b = "NEW".getBytes();
-		this.ia= InetAddress.getLocalHost();
+		//this.ia= InetAddress.getByAddress("137.112.230.174".getBytes());
+		//this.ia = InetAddress.getLocalHost();
+		this.ia = InetAddress.getByName("RHIT-R90Y2R7N");
+		System.out.println(this.ia);
 		DatagramPacket dp = new DatagramPacket(b,b.length, ia, 6000);
 		System.out.println("Sending..");
 		ds.send(dp);
