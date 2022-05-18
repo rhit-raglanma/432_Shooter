@@ -2,6 +2,8 @@ package space;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class SpaceShip extends Sprite {
         this.hit = false;
         
         initSpaceShip();
+        
+        
     }
 
     private void initSpaceShip() {
@@ -31,6 +35,18 @@ public class SpaceShip extends Sprite {
         
         loadImage("src/resources/spaceship.png"); 
         getImageDimensions();
+        
+        
+//        addMouseListener(new MouseAdapter() {
+//        	public void mousePressed(MouseEvent e) {
+//        		
+//        	}
+//        });
+        
+//        addMouseMotionListener(new MouseMotionAdapter() {
+//        	
+//        })
+        
     }
     
     public String getMoveString() {
@@ -98,6 +114,13 @@ public class SpaceShip extends Sprite {
     	
         return new ArrayList<Missile>(missiles);
     }
+    
+    public void mousePressed(MouseEvent e) {
+    	
+    	
+    	
+    	this.firing = true;
+    }
 
     public void keyPressed(KeyEvent e) {
 
@@ -136,6 +159,8 @@ public class SpaceShip extends Sprite {
     public void fire() {
         missiles.add(new Missile(x + width, y + height / 2));
     }
+    
+    
 
     public void keyReleased(KeyEvent e) {
 

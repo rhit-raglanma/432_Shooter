@@ -12,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
@@ -70,6 +72,7 @@ public class Board extends JPanel implements ActionListener {
     private void initBoard() {
 
         addKeyListener(new TAdapter());
+        addMouseListener(new BoardMouseListener());
         setBackground(Color.BLACK);
         setFocusable(true);
         
@@ -246,7 +249,7 @@ public class Board extends JPanel implements ActionListener {
 		byte[] fb = s.getBytes();
 		DatagramPacket dp = new DatagramPacket(fb,fb.length, this.ia, 6000);
 		//DatagramSocket ds;
-		long startTime = System.nanoTime();
+		//long startTime = System.nanoTime();
 		ds.send(dp);
 		
 		
@@ -255,7 +258,7 @@ public class Board extends JPanel implements ActionListener {
 		
 		
 		ds.receive(dp1);
-		long endTime = System.nanoTime();
+		//long endTime = System.nanoTime();
 		
 		//System.out.println((endTime - startTime)/1000000);
 		
@@ -310,6 +313,16 @@ public class Board extends JPanel implements ActionListener {
 		//spaceShip.setLocation(x, y);
 
         //spaceShip.move();
+    }
+    
+    public class BoardMouseListener extends MouseAdapter {
+
+    	@Override
+        public void mousePressed(MouseEvent me) { 
+//        	System.out.println(me.getX() +", " +me.getY()); 
+    		shipList[player].mousePressed(me);
+        } 
+
     }
 
     private class TAdapter extends KeyAdapter {
