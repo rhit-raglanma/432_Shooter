@@ -157,7 +157,10 @@ public class Server {
 			
 			byte[] b2 = (sendString).getBytes();
 			//InetAddress ia = InetAddress.getLocalHost();
+			
 			InetAddress ia = InetAddress.getByName(ips[p]);
+			System.out.println(ia);
+			System.out.println(ips[playerCount]);
 			DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
 			ds.send(dp1);
 			
