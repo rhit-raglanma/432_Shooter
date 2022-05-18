@@ -1,6 +1,7 @@
 package space;
 
 import java.net.DatagramPacket;
+import java.util.Scanner;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
@@ -36,6 +37,11 @@ public class Board extends JPanel implements ActionListener {
     
     public Board() throws Exception {
     	
+    	Scanner myScanner = new Scanner(System.in);
+    	
+    	System.out.println("Enter ip: ");
+    	String ipString = myScanner.nextLine();
+    	
     	this.removeMissiles = new ArrayList<>();
     	
     	int playerNum;
@@ -46,11 +52,11 @@ public class Board extends JPanel implements ActionListener {
 		
 //		int i = -4;
 //		byte[] b = String.valueOf(i).getBytes();
-		byte[] b = "NEW".getBytes();
+		byte[] b = ("NEW" + ipString).getBytes();
 		//this.ia= InetAddress.getByAddress("137.112.230.174".getBytes());
 		//this.ia = InetAddress.getLocalHost();
 		this.ia = InetAddress.getByName("137.112.230.174");
-		System.out.println(this.ia);
+		//System.out.println(this.ia);
 		DatagramPacket dp = new DatagramPacket(b,b.length, ia, 6000);
 		System.out.println("Sending..");
 		ds.send(dp);
