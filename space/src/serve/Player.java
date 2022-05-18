@@ -6,6 +6,7 @@ public class Player {
 	public int y;
 	public int playernum;
 	public boolean firing;
+	public boolean hit;
 	
 	public Player(int playernum) {
 		
@@ -13,7 +14,7 @@ public class Player {
 		this.playernum = playernum;
 		this.x = 900;
 		this.y = 900;
-		
+		this.hit = false;
 	}
 	
 	
@@ -37,6 +38,12 @@ public class Player {
 		} else {
 			this.firing = false;
 		}
+		if (s.charAt(5) == '1') {
+			this.hit = true;
+		} else {
+			this.hit = false;
+		}
+		
 		
 		if (this.x < 0) {
 			this.x = 0;

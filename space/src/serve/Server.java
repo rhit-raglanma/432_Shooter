@@ -13,7 +13,7 @@ public class Server {
 		
 		DatagramSocket ds = new DatagramSocket(6000);
 		
-		byte[] b1 = new byte[7];
+		byte[] b1 = new byte[8];
 		
 		//int count = 0;
 		
@@ -24,6 +24,7 @@ public class Server {
 		}
 		
 		int[][] shootQueue = new int[10][10];
+		boolean[][] hitQueue = new boolean[10][10];
 		
 		
 		while (true) {
@@ -57,6 +58,7 @@ public class Server {
 				
 				for (int i = 0; i < 10; i++) {
 					shootQueue[i][playerCount] = 0;
+					hitQueue[i][playerCount] = false;
 				}
 				
 				
@@ -80,6 +82,12 @@ public class Server {
 			if (str.charAt(5) == '1') {
 				for (int i = 0; i < 10; i++) {
 					shootQueue[p][i] += 1;
+				}
+			}
+			
+			if (str.charAt(6) == '1') {
+				for (int i = 0; i < 10; i++) {
+					hitQueue[p][i] = true;
 				}
 			}
 			
@@ -108,6 +116,14 @@ public class Server {
 				if (shootQueue[i][p] > 0) {
 					sendString = sendString.concat("1");
 					shootQueue[i][p]--;
+				} else {
+					sendString = sendString.concat("0");
+				}
+				
+				
+				if (hitQueue[i][p]) {
+					sendString = sendString.concat("1");
+					hitQueue[i][p] = false;
 				} else {
 					sendString = sendString.concat("0");
 				}

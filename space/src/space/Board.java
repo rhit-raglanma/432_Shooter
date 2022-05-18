@@ -30,7 +30,11 @@ public class Board extends JPanel implements ActionListener {
     //private SpaceShip otherShip;
     private SpaceShip[] shipList;
     
+    private ArrayList<Missile> removeMissiles;
+    
     public Board() throws Exception {
+    	
+    	this.removeMissiles = new ArrayList<>();
     	
     	int playerNum;
 		
@@ -100,7 +104,13 @@ public class Board extends JPanel implements ActionListener {
         
         for (int i = 0; i < 10; i++) {
         	
+        	g2d.setColor(Color.white);
+        	if (shipList[i].getHit()) {
+        		g2d.setColor(Color.yellow);
+        	}
         	g2d.fillOval(shipList[i].getX(), shipList[i].getY(), 40, 40);
+        	
+        	g2d.setColor(Color.white);
 
             missiles.addAll(shipList[i].getMissiles());
         	
@@ -115,13 +125,25 @@ public class Board extends JPanel implements ActionListener {
 //        g2d.fillOval(otherShip.getX(), otherShip.getY(), 40, 40);
 
         for (Missile missile : missiles) {
+        	
+        	//Color hitColor = 
             
+        	
             g2d.fillOval(missile.getX(), missile.getY(), 10, 10);
+            
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+    	
+    	
+    	for (int i = 0; i < 10; i++) {
+    		if (shipList[i].getHit()) {
+    			shipList[i].setHit(false);
+    		}
+    	}
+    	
 
         updateMissiles();
         try {
@@ -130,8 +152,19 @@ public class Board extends JPanel implements ActionListener {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+        
+        
 
         repaint();
+    }
+    
+    private void collissionCheck(List<Missile> missiles) {
+    	for (Missile m: missiles) {
+    		if (m.getHitbox().intersects(shipList[this.player].getHitbox())) {
+    			shipList[this.player].setHit(true);
+    			
+    		}
+    	}
     }
     
     private List<Missile> getAllMissiles() {
@@ -159,6 +192,8 @@ public class Board extends JPanel implements ActionListener {
     private void updateMissiles() {
 
         List<Missile> missiles = this.getAllMissiles();
+        
+        
 
         for (int i = 0; i < missiles.size(); i++) {
 
@@ -173,6 +208,8 @@ public class Board extends JPanel implements ActionListener {
                 missiles.remove(i);
             }
         }
+        
+        collissionCheck(missiles);
     }
 
     private void updateSpaceShip() throws Exception {
@@ -184,6 +221,11 @@ public class Board extends JPanel implements ActionListener {
         		}
         	}
     	}
+    	
+    	
+    	
+    	
+    	
     	
     	
     	DatagramSocket ds = new DatagramSocket();
@@ -198,7 +240,7 @@ public class Board extends JPanel implements ActionListener {
     		
     	} 
     	
-    	byte[] b1 = new byte[80];
+    	byte[] b1 = new byte[90];
 		DatagramPacket dp1 = new DatagramPacket(b1, b1.length);
     	
 		byte[] fb = s.getBytes();
@@ -227,12 +269,17 @@ public class Board extends JPanel implements ActionListener {
 //		int y = Integer.parseInt(position.substring(3, 6).trim());
 		
 		for (int i = 0; i < 10; i++) {
-			int x = Integer.parseInt(position.substring(i*7, i*7+3));
-			int y = Integer.parseInt(position.substring(i*7+3, i*7+6).trim());
-			int f = Integer.parseInt(position.substring(i*7+6, i*7+7).trim());
+			int x = Integer.parseInt(position.substring(i*8, i*8+3));
+			int y = Integer.parseInt(position.substring(i*8+3, i*8+6).trim());
+			int f = Integer.parseInt(position.substring(i*8+6, i*8+7).trim());
+			int h = Integer.parseInt(position.substring(i*8+7, i*8+8).trim());
 			
 			if (f == 1) {
 				shipList[i].fire();
+			}
+			
+			if (h == 1) {
+				shipList[i].setHit(true);
 			}
 			
 			shipList[i].setLocation(x, y);

@@ -1,5 +1,6 @@
 package space;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,15 @@ public class SpaceShip extends Sprite {
     private int dy;
     private List<Missile> missiles;
     private boolean firing;
+    private Rectangle hitbox;
+    private boolean hit;
 
     public SpaceShip(int x, int y) {
         super(x, y);
         
         this.firing = false;
+        this.hitbox = new Rectangle(x, y, 40, 40);
+        this.hit = false;
         
         initSpaceShip();
     }
@@ -62,12 +67,20 @@ public class SpaceShip extends Sprite {
 			move = move.concat("0");
 		}
 		
+		if (this.hit) {
+			move = move.concat("1");
+		} else {
+			move = move.concat("0");
+		}
+		
 		return move;
 	}
     
     public void setLocation(int mx, int my) {
     	x = mx;
     	y = my;
+    	
+    	this.hitbox = new Rectangle(x, y, 40, 40);
     }
 
     public void move() {
@@ -143,5 +156,17 @@ public class SpaceShip extends Sprite {
         if (key == KeyEvent.VK_DOWN) {
             dy = 0;
         }
+    }
+    
+    public Rectangle getHitbox() {
+    	return this.hitbox;
+    }
+    
+    public void setHit(boolean b) {
+    	this.hit = b;
+    }
+    
+    public boolean getHit() {
+    	return this.hit;
     }
 }
