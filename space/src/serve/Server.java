@@ -13,7 +13,7 @@ public class Server {
 		
 		DatagramSocket ds = new DatagramSocket(6000);
 		
-		byte[] b1 = new byte[8];
+		byte[] b1 = new byte[14];
 		
 		//int count = 0;
 		
@@ -83,6 +83,8 @@ public class Server {
 				for (int i = 0; i < 10; i++) {
 					shootQueue[p][i] += 1;
 				}
+				
+				
 			}
 			
 			if (str.charAt(6) == '1') {
@@ -128,6 +130,8 @@ public class Server {
 					sendString = sendString.concat("0");
 				}
 				
+				sendString = sendString.concat(String.format("%03d", players.get(i).bx));
+				sendString = sendString.concat(String.format("%03d", players.get(i).by));
 				
 //				if (players.get(i).firing) {
 //					sendString = sendString.concat("1");

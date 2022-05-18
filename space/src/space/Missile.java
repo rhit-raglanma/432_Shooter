@@ -7,9 +7,14 @@ public class Missile extends Sprite {
     private final int BOARD_WIDTH = 390;
     private final int MISSILE_SPEED = 25;
     private Rectangle hitbox;
+    private int dx;
+    private int dy;
 
-    public Missile(int x, int y) {
+    public Missile(int x, int y, int dx, int dy) {
         super(x, y);
+        
+        this.dx = dx;
+        this.dy = dy;
         
         this.hitbox = new Rectangle(x, y, 10, 10);
         
@@ -24,7 +29,8 @@ public class Missile extends Sprite {
 
     public void move() {
         
-        x += MISSILE_SPEED;
+        x += this.dx;
+        y += this.dy;
         
         this.hitbox = new Rectangle(x, y, 10, 10);
         

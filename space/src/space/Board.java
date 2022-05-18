@@ -243,7 +243,7 @@ public class Board extends JPanel implements ActionListener {
     		
     	} 
     	
-    	byte[] b1 = new byte[90];
+    	byte[] b1 = new byte[150];
 		DatagramPacket dp1 = new DatagramPacket(b1, b1.length);
     	
 		byte[] fb = s.getBytes();
@@ -272,10 +272,14 @@ public class Board extends JPanel implements ActionListener {
 //		int y = Integer.parseInt(position.substring(3, 6).trim());
 		
 		for (int i = 0; i < 10; i++) {
-			int x = Integer.parseInt(position.substring(i*8, i*8+3));
-			int y = Integer.parseInt(position.substring(i*8+3, i*8+6).trim());
-			int f = Integer.parseInt(position.substring(i*8+6, i*8+7).trim());
-			int h = Integer.parseInt(position.substring(i*8+7, i*8+8).trim());
+			int x = Integer.parseInt(position.substring(i*14, i*14+3));
+			int y = Integer.parseInt(position.substring(i*14+3, i*14+6));
+			int f = Integer.parseInt(position.substring(i*14+6, i*14+7));
+			int h = Integer.parseInt(position.substring(i*14+7, i*14+8));
+			int bx = Integer.parseInt(position.substring(i*14+8, i*14+11));
+			int by = Integer.parseInt(position.substring(i*14+11, i*14+14).trim());
+			
+			shipList[i].setDirection(bx, by);
 			
 			if (f == 1) {
 				shipList[i].fire();

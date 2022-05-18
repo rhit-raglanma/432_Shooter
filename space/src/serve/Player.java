@@ -7,9 +7,13 @@ public class Player {
 	public int playernum;
 	public boolean firing;
 	public boolean hit;
+	public int bx;
+	public int by;
 	
 	public Player(int playernum) {
 		
+		this.bx = 0;
+		this.by = 0;
 		this.firing = false;
 		this.playernum = playernum;
 		this.x = 900;
@@ -44,6 +48,8 @@ public class Player {
 			this.hit = false;
 		}
 		
+		this.bx = Integer.parseInt(s.substring(6, 9));
+		this.by = Integer.parseInt(s.substring(9, 12));
 		
 		if (this.x < 0) {
 			this.x = 0;
