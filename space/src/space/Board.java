@@ -39,8 +39,11 @@ public class Board extends JPanel implements ActionListener {
     	
     	Scanner myScanner = new Scanner(System.in);
     	
-    	System.out.println("Enter ip: ");
+    	System.out.println("Enter your ip: ");
     	String ipString = myScanner.nextLine();
+    	
+    	System.out.println("Enter host ip: ");
+    	String hostIpString = myScanner.nextLine();
     	
     	this.removeMissiles = new ArrayList<>();
     	
@@ -55,7 +58,7 @@ public class Board extends JPanel implements ActionListener {
 		byte[] b = ("NEW" + ipString).getBytes();
 		//this.ia= InetAddress.getByAddress("137.112.230.174".getBytes());
 		//this.ia = InetAddress.getLocalHost();
-		this.ia = InetAddress.getByName("137.112.230.174");
+		this.ia = InetAddress.getByName(hostIpString);
 		//System.out.println(this.ia);
 		DatagramPacket dp = new DatagramPacket(b,b.length, ia, 6000);
 		System.out.println("Sending..");
