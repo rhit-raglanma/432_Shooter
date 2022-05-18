@@ -17,6 +17,8 @@ public class Server {
 		
 		byte[] b1 = new byte[14];
 		
+		String[] ips = new String[10];
+		
 		//int count = 0;
 		
 		int playerCount = 0;
@@ -46,12 +48,13 @@ public class Server {
 			
 			System.out.println("received: " + str);
 			
-			if (str.equals("NEW")) {
+			if (str.substring(0, 3).equals("NEW")) {
 				
 				if (playerCount == 10) {
 					
 					byte[] b2 = (-1 + "").getBytes();
-					InetAddress ia = InetAddress.getLocalHost();
+					//InetAddress ia = InetAddress.getLocalHost();
+					InetAddress ia = InetAddress.getByName(ips[playerCount]);
 					DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
 					ds.send(dp1);
 					continue;
@@ -65,10 +68,14 @@ public class Server {
 					hitQueue[i][playerCount] = false;
 				}
 				
+				ips[playerCount] = str.substring(3);
+				
+				
 				
 				
 				byte[] b2 = (playerCount + "").getBytes();
-				InetAddress ia = InetAddress.getLocalHost();
+				//InetAddress ia = InetAddress.getLocalHost();
+				InetAddress ia = InetAddress.getByName(ips[playerCount]);
 				DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
 				ds.send(dp1);
 				
@@ -149,7 +156,8 @@ public class Server {
 			
 			
 			byte[] b2 = (sendString).getBytes();
-			InetAddress ia = InetAddress.getLocalHost();
+			//InetAddress ia = InetAddress.getLocalHost();
+			InetAddress ia = InetAddress.getByName(ips[p]);
 			DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
 			ds.send(dp1);
 			
