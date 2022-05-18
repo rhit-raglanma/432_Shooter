@@ -34,13 +34,15 @@ public class Server {
 			DatagramPacket dp = new DatagramPacket(b1, b1.length);
 			ds.receive(dp);
 			
-			//System.out.println("received");
+			
 			
 			String str = new String(dp.getData(), 0, dp.getLength());
 			//System.out.println("Received: " + str);
 			//int num = Integer.parseInt(str.trim());
 			//count += num;
 			//System.out.println("Count: " + count);
+			
+			System.out.println("received: " + str);
 			
 			if (str.equals("NEW")) {
 				
