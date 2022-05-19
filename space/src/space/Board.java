@@ -29,6 +29,7 @@ public class Board extends JPanel implements ActionListener {
     //private SpaceShip spaceShip;
     private int player;
     private InetAddress ia;
+    private boolean gameOver;
     
     //private SpaceShip otherShip;
     private SpaceShip[] shipList;
@@ -39,6 +40,8 @@ public class Board extends JPanel implements ActionListener {
     	
 //    	String thisIPString = InetAddress.getLocalHost().getHostAddress();
 //		System.out.println(thisIPString);
+    	
+    	this.gameOver = false;
     	
     	Scanner myScanner = new Scanner(System.in);
     	
@@ -120,6 +123,14 @@ public class Board extends JPanel implements ActionListener {
     private void doDrawing(Graphics g) {
 
         Graphics2D g2d = (Graphics2D) g;
+        
+        if (this.gameOver) {
+        	g2d.setColor(Color.red);
+        	g2d.drawString("GAME OVER", 360, 390);
+        	this.timer.stop();
+        }
+        
+        
         
         List<Missile> missiles = new ArrayList<Missile>();
         
@@ -301,7 +312,10 @@ public class Board extends JPanel implements ActionListener {
 		
 		if (position.charAt(0) == '-') {
 			System.out.println("YOU DIED");
-			System.exit(0);
+			//System.exit(0);
+			//this.timer.stop();
+			this.gameOver = true;
+			return;
 		}
 		
 //		int x = Integer.parseInt(position.substring(0, 3));

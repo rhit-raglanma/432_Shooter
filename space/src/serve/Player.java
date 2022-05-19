@@ -10,8 +10,16 @@ public class Player {
 	public int bx;
 	public int by;
 	public int hp;
+	private int[] startxA;
+	private int[] startyA;
 	
 	public Player(int playernum) {
+		
+		int[] startx = {70, 670, 70, 670, 70, 670, 370, 370, 370};
+		int[] starty = {55, 655, 655, 55, 355, 355, 55, 655, 355};
+		
+		this.startxA = startx;
+		this.startyA = starty;
 		
 		this.hp = 9;
 		this.bx = 0;
@@ -66,8 +74,8 @@ public class Player {
 		}
 		
 		if (this.x == 900 && this.y == 900) {
-			this.x = 100;
-			this.y = 100;
+			this.x = this.startxA[this.playernum];
+			this.y = this.startyA[this.playernum];
 		}
 		
 		if (this.x > 740) {
