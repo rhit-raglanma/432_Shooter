@@ -7,10 +7,10 @@ public class Missile extends Sprite {
     private final int BOARD_WIDTH = 390;
     private final int MISSILE_SPEED = 25;
     private Rectangle hitbox;
-    private int dx;
-    private int dy;
+    private double dx;
+    private double dy;
 
-    public Missile(int x, int y, int dx, int dy) {
+    public Missile(int x, int y, double dx, double dy) {
         super(x, y);
         
         this.dx = dx;
