@@ -45,7 +45,7 @@ public class Main extends JFrame {
     public static void main(String[] args) throws Exception {
     	
     	
-		
+    	
 		
         
         EventQueue.invokeLater(() -> {
@@ -53,4 +53,6 @@ public class Main extends JFrame {
             ex.setVisible(true);
         });
     }
+    
+    
 }
