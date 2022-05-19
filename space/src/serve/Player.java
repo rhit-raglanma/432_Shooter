@@ -28,16 +28,16 @@ public class Player {
 	public void move(String s) {
 		
 		if (s.charAt(0) == '1') {
-			this.y -= 5;
+			this.y -= 4 + (9 - this.hp) / 2;
 		}
 		if (s.charAt(1) == '1') {
-			this.y += 5;
+			this.y += 4 + (9 - this.hp) / 2;
 		}
 		if (s.charAt(2) == '1') {
-			this.x -= 5;
+			this.x -= 4 + (9 - this.hp) / 2;
 		}
 		if (s.charAt(3) == '1') {
-			this.x += 5;
+			this.x += 4 + (9 - this.hp) / 2;
 		}
 		if (s.charAt(4) == '1') {
 			this.firing = true;
