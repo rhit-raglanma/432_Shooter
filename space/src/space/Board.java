@@ -210,6 +210,11 @@ public class Board extends JPanel implements ActionListener {
         			shipList[this.player].setHit(true);
         			shipList[this.player].setHitBy(i);
         		}
+    			for(int j = 0; j < 10; j++) {
+    				if(m.getHitbox().intersects(shipList[j].getHitbox())) {
+    					m.setVisible(false);
+    				}
+    			}
     		}
 //    		if (m.getHitbox().intersects(shipList[this.player].getHitbox())) {
 //    			shipList[this.player].setHit(true);

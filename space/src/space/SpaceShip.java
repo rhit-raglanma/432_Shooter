@@ -191,9 +191,9 @@ public class SpaceShip extends Sprite {
 
     public void fire() {
 //        missiles.add(new Missile(x + width, y + height / 2, (this.bdx - this.x)/10, (this.bdy - this.y)/10));
-    	double vecLen = Math.sqrt(Math.pow(this.bdx - this.x, 2) + Math.pow(this.bdy - this.y, 2));
+    	double vecLen = Math.sqrt(Math.pow(this.bdx - (this.x + 20), 2) + Math.pow(this.bdy - (this.y + 20), 2));
     	
-    	Missile m = new Missile(x + 15, y + 15, (double)20*(this.bdx - (this.x + 15))/vecLen, (double)20*(this.bdy - (this.y + 15))/vecLen);
+    	Missile m = new Missile(x + 20, y + 20, (double)20*(this.bdx - (this.x + 20))/vecLen, (double)20*(this.bdy - (this.y + 20))/vecLen);
     	
     	m.move(); m.move();
     	

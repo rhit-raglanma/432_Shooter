@@ -21,7 +21,7 @@ public class Server {
 		
 		String[] ips = new String[10];
 		
-		//int count = 0;
+		int count = 0;
 		
 		//int playerCount = 0;
 		
@@ -44,12 +44,12 @@ public class Server {
 			
 			
 			String str = new String(dp.getData(), 0, dp.getLength());
-			//System.out.println("Received: " + str);
-			//int num = Integer.parseInt(str.trim());
-			//count += num;
-			//System.out.println("Count: " + count);
+//			System.out.println("Received: " + str);
+//			int num = Integer.parseInt(str.trim());
+//			count += num;
+//			System.out.println("Count: " + count);
 			
-			//System.out.println("received: " + str);
+//			System.out.println("received: " + str);
 			
 			if (str.substring(0, 3).equals("NEW")) {
 				
@@ -113,14 +113,14 @@ public class Server {
 				
 				
 			}
-			
+
 			if (str.charAt(6) == '1') {
 				for (int i = 0; i < 10; i++) {
 					hitQueue[p][i] = true;
 				}
 			}
-			
 			int hitBy = Integer.parseInt(str.substring(13, 14));
+//			System.out.println(hitBy);
 			
 			
 			//X,Y
