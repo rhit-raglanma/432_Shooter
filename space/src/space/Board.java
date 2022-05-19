@@ -131,6 +131,7 @@ public class Board extends JPanel implements ActionListener {
         		g2d.setColor(Color.yellow);
         	}
         	g2d.fillOval(shipList[i].getX(), shipList[i].getY(), 40, 40);
+        	g2d.drawString(shipList[i].getHP() + "", shipList[i].getX(), shipList[i].getY());
         	
         	g2d.setColor(Color.white);
 
@@ -281,22 +282,30 @@ public class Board extends JPanel implements ActionListener {
 		
 		//System.out.println((endTime - startTime)/1000000);
 		
+		
+		
+		
+		
 		String position = new String(dp1.getData());
 		
 		//System.out.println(position);
 		
-		
+		if (position.charAt(0) == '-') {
+			System.out.println("YOU DIED");
+			System.exit(0);
+		}
 		
 //		int x = Integer.parseInt(position.substring(0, 3));
 //		int y = Integer.parseInt(position.substring(3, 6).trim());
 		
 		for (int i = 0; i < 10; i++) {
-			int x = Integer.parseInt(position.substring(i*14, i*14+3));
-			int y = Integer.parseInt(position.substring(i*14+3, i*14+6));
-			int f = Integer.parseInt(position.substring(i*14+6, i*14+7));
-			int h = Integer.parseInt(position.substring(i*14+7, i*14+8));
-			int bx = Integer.parseInt(position.substring(i*14+8, i*14+11));
-			int by = Integer.parseInt(position.substring(i*14+11, i*14+14).trim());
+			int x = Integer.parseInt(position.substring(i*15, i*15+3));
+			int y = Integer.parseInt(position.substring(i*15+3, i*15+6));
+			int f = Integer.parseInt(position.substring(i*15+6, i*15+7));
+			int h = Integer.parseInt(position.substring(i*15+7, i*15+8));
+			int bx = Integer.parseInt(position.substring(i*15+8, i*15+11));
+			int by = Integer.parseInt(position.substring(i*15+11, i*15+14));
+			int hp = Integer.parseInt(position.substring(i*15+14, i*15+15).trim());
 			
 			shipList[i].setDirection(bx, by);
 			
@@ -310,9 +319,11 @@ public class Board extends JPanel implements ActionListener {
 			
 			shipList[i].setLocation(x, y);
 			
-			if (i == this.player) {
-				System.out.println(x + " " + y);
-			}
+//			if (i == this.player) {
+//				System.out.println(x + " " + y);
+//			}
+			
+			shipList[i].setHP(hp);
 			
 			
 			

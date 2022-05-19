@@ -9,9 +9,11 @@ public class Player {
 	public boolean hit;
 	public int bx;
 	public int by;
+	public int hp;
 	
 	public Player(int playernum) {
 		
+		this.hp = 9;
 		this.bx = 0;
 		this.by = 0;
 		this.firing = false;
@@ -43,6 +45,11 @@ public class Player {
 			this.firing = false;
 		}
 		if (s.charAt(5) == '1') {
+			
+			if (!this.hit && this.hp > 0) {
+				this.hp--;
+			}
+			
 			this.hit = true;
 		} else {
 			this.hit = false;

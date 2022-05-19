@@ -11,6 +11,8 @@ public class Server {
 	
 	public static void main(String[] args) throws Exception {
 		
+		int[] playerCountArray = new int[10];
+		
 		ArrayList<Player> players = new ArrayList<Player>();
 		
 		DatagramSocket ds = new DatagramSocket(6000);
@@ -21,7 +23,7 @@ public class Server {
 		
 		//int count = 0;
 		
-		int playerCount = 0;
+		//int playerCount = 0;
 		
 		for (int i = 0; i < 10; i++) {
 			players.add(new Player(i));
@@ -29,6 +31,7 @@ public class Server {
 		
 		int[][] shootQueue = new int[10][10];
 		boolean[][] hitQueue = new boolean[10][10];
+		//int[] hp = new int[10];
 		
 		
 		while (true) {
@@ -50,36 +53,49 @@ public class Server {
 			
 			if (str.substring(0, 3).equals("NEW")) {
 				
-				if (playerCount == 10) {
+				int j = -1;
+				
+				for (int i = 0; i < 10; i++) {
+					if (playerCountArray[i] == 0) {
+						j = i;
+						break;
+					}
+				}
+				
+				if (j == -1) {
 					
 					byte[] b2 = (-1 + "").getBytes();
 					//InetAddress ia = InetAddress.getLocalHost();
-					InetAddress ia = InetAddress.getByName(ips[playerCount]);
+					InetAddress ia = InetAddress.getByName(ips[j]);
 					DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
 					ds.send(dp1);
 					continue;
 					
 				}
 				
+				playerCountArray[j] = 1;
+				
+				
+				
 //				players.add(new Player(playerCount));
 				
 				for (int i = 0; i < 10; i++) {
-					shootQueue[i][playerCount] = 0;
-					hitQueue[i][playerCount] = false;
+					shootQueue[i][j] = 0;
+					hitQueue[i][j] = false;
 				}
 				
-				ips[playerCount] = str.substring(3);
+				ips[j] = str.substring(3);
 				
 				
 				
 				
-				byte[] b2 = (playerCount + "").getBytes();
+				byte[] b2 = (j + "").getBytes();
 				//InetAddress ia = InetAddress.getLocalHost();
-				InetAddress ia = InetAddress.getByName(ips[playerCount]);
+				InetAddress ia = InetAddress.getByName(ips[j]);
 				DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
 				ds.send(dp1);
 				
-				playerCount++;
+				//playerCount++;
 				
 				continue;
 			} 
@@ -120,7 +136,33 @@ public class Server {
 //				sendString = sendString.concat(formatY2);
 //			}
 			
+			
+			if (players.get(p).hp <= 0) {
+				byte[] b2 = ("-").getBytes();
+				
+				players.get(p).x = 900;
+				players.get(p).y = 900;
+				players.get(p).firing = false;
+				players.get(p).hit = false;
+				players.get(p).bx = 0;
+				players.get(p).by = 0;
+				players.get(p).hp = 9;
+				
+				playerCountArray[p] = 0;
+				
+				InetAddress ia = InetAddress.getByName(ips[p]);
+				
+				DatagramPacket dp1 = new DatagramPacket(b2,b2.length,ia,dp.getPort());
+				ds.send(dp1);
+			}
+			
+			
 			String sendString = "";
+			
+			
+			
+			
+			
 			for (int i = 0; i < 10; i++) {
 				sendString = sendString.concat(String.format("%03d", players.get(i).x));
 				sendString = sendString.concat(String.format("%03d", players.get(i).y));
@@ -143,6 +185,8 @@ public class Server {
 				
 				sendString = sendString.concat(String.format("%03d", players.get(i).bx));
 				sendString = sendString.concat(String.format("%03d", players.get(i).by));
+				
+				sendString = sendString.concat(Integer.toString(players.get(i).hp));
 				
 //				if (players.get(i).firing) {
 //					sendString = sendString.concat("1");

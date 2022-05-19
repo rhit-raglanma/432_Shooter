@@ -15,12 +15,14 @@ public class SpaceShip extends Sprite {
     private boolean firing;
     private Rectangle hitbox;
     private boolean hit;
+    private int hp;
     
     private int bdx, bdy;
 
     public SpaceShip(int x, int y) {
         super(x, y);
         
+        this.hp = 9;
         this.firing = false;
         this.hitbox = new Rectangle(x, y, 40, 40);
         this.hit = false;
@@ -97,6 +99,14 @@ public class SpaceShip extends Sprite {
 		return move;
 	}
     
+    public void setHP(int h) {
+    	this.hp = h;
+    }
+    
+    public int getHP() {
+    	return this.hp;
+    }
+    
     public void setDirection(int bx, int by) {
     	this.bdx = bx;
     	this.bdy = by;
@@ -171,7 +181,7 @@ public class SpaceShip extends Sprite {
 //        missiles.add(new Missile(x + width, y + height / 2, (this.bdx - this.x)/10, (this.bdy - this.y)/10));
     	double vecLen = Math.sqrt(Math.pow(this.bdx - this.x, 2) + Math.pow(this.bdy - this.y, 2));
     	
-    	Missile m = new Missile(x + 15, y + 15, (double)20*(this.bdx - this.x)/vecLen, (double)20*(this.bdy - this.y)/vecLen);
+    	Missile m = new Missile(x + 15, y + 15, (double)20*(this.bdx - (this.x + 15))/vecLen, (double)20*(this.bdy - (this.y + 15))/vecLen);
     	
     	m.move(); m.move();
     	
