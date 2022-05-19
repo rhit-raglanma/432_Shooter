@@ -16,8 +16,10 @@ public class Server {
 		ArrayList<Player> players = new ArrayList<Player>();
 		
 		ArrayList<ServerBlock> blocks = new ArrayList<ServerBlock>();
-		blocks.add(new ServerBlock(250, 350, 100, 100));
-		blocks.add(new ServerBlock(650, 350, 100, 100));
+		blocks.add(new ServerBlock(150, 350, 100, 100));
+		blocks.add(new ServerBlock(550, 350, 100, 100));
+		blocks.add(new ServerBlock(350, 150, 100, 100));
+		blocks.add(new ServerBlock(350, 550, 100, 100));
 		
 		DatagramSocket ds = new DatagramSocket(6000);
 		

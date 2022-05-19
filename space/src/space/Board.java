@@ -101,12 +101,14 @@ public class Board extends JPanel implements ActionListener {
         setFocusable(true);
         
         shipList = new SpaceShip[10];
-        blockList = new Block[2];
+        blockList = new Block[4];
 
         //spaceShip = new SpaceShip(ICRAFT_X, ICRAFT_Y);
         //otherShip = new SpaceShip(-100, -100);
-        blockList[0] = new Block(250, 350, 100, 100);
-        blockList[1] = new Block(650, 350, 100, 100);
+        blockList[0] = new Block(150, 350, 100, 100);
+        blockList[1] = new Block(550, 350, 100, 100);
+        blockList[2] = new Block(350, 150, 100, 100);
+        blockList[3] = new Block(350, 550, 100, 100);
         
         
         for (int i = 0; i < 10; i++) {
