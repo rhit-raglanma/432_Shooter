@@ -34,7 +34,17 @@ public class Missile extends Sprite {
         
         this.hitbox = new Rectangle(x, y, 10, 10);
         
-        if (x > BOARD_WIDTH) {
+        if (x > 900) {
+            visible = false;
+        }
+        if (y > 900) {
+            visible = false;
+        }
+        
+        if (x < 0) {
+            visible = false;
+        }
+        if (y < 0) {
             visible = false;
         }
     }

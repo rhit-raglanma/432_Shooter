@@ -310,7 +310,15 @@ public class Board extends JPanel implements ActionListener {
 			
 			shipList[i].setLocation(x, y);
 			
+			if (i == this.player) {
+				System.out.println(x + " " + y);
+			}
+			
+			
+			
 		}
+		
+		//System.out.println(shipList[this.player].x + " " + shipList[this.player].y);
 		
 		
 		

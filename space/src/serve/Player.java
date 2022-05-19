@@ -63,11 +63,11 @@ public class Player {
 			this.y = 100;
 		}
 		
-		if (this.x > 340) {
-			this.x = 340;
+		if (this.x > 740) {
+			this.x = 740;
 		}
-		if (this.y > 210) {
-			this.y = 210;
+		if (this.y > 710) {
+			this.y = 710;
 		}
 	}
 	

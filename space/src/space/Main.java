@@ -31,7 +31,7 @@ public class Main extends JFrame {
 			e.printStackTrace();
 		}
         
-        setSize(400, 300);
+        setSize(800, 800);
         setResizable(false);
         
         setTitle("Shooting missiles");
