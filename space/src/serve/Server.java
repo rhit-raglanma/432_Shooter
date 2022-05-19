@@ -15,6 +15,10 @@ public class Server {
 		
 		ArrayList<Player> players = new ArrayList<Player>();
 		
+		ArrayList<ServerBlock> blocks = new ArrayList<ServerBlock>();
+		blocks.add(new ServerBlock(250, 350, 100, 100));
+		blocks.add(new ServerBlock(650, 350, 100, 100));
+		
 		DatagramSocket ds = new DatagramSocket(6000);
 		
 		byte[] b1 = new byte[26];
@@ -26,7 +30,7 @@ public class Server {
 		//int playerCount = 0;
 		
 		for (int i = 0; i < 10; i++) {
-			players.add(new Player(i));
+			players.add(new Player(i, blocks));
 		}
 		
 		int[][] shootQueue = new int[10][10];

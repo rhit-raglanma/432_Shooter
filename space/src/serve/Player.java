@@ -1,5 +1,7 @@
 package serve;
 
+import java.util.ArrayList;
+
 public class Player {
 	
 	public int x;
@@ -13,7 +15,9 @@ public class Player {
 	private int[] startxA;
 	private int[] startyA;
 	
-	public Player(int playernum) {
+	private ArrayList<ServerBlock> blocks = new ArrayList<ServerBlock>();
+	
+	public Player(int playernum, ArrayList<ServerBlock> blocks) {
 		
 		int[] startx = {70, 670, 70, 670, 70, 670, 370, 370, 370};
 		int[] starty = {55, 655, 655, 55, 355, 355, 55, 655, 355};
@@ -29,6 +33,8 @@ public class Player {
 		this.x = 900;
 		this.y = 900;
 		this.hit = false;
+		
+		this.blocks = blocks;
 	}
 	
 	
@@ -37,15 +43,35 @@ public class Player {
 		
 		if (s.charAt(0) == '1') {
 			this.y -= 4 + (9 - this.hp) / 2;
+			for(ServerBlock b : blocks) {
+				if(b.checkCollision(x, y) == 3) {
+					this.y = b.getBot() + 1;
+				}
+			}
 		}
 		if (s.charAt(1) == '1') {
 			this.y += 4 + (9 - this.hp) / 2;
+			for(ServerBlock b : blocks) {
+				if(b.checkCollision(x, y) == 2) {
+					this.y = b.getTop() - 41;
+				}
+			}
 		}
 		if (s.charAt(2) == '1') {
 			this.x -= 4 + (9 - this.hp) / 2;
+			for(ServerBlock b : blocks) {
+				if(b.checkCollision(x, y) == 4) {
+					this.x = b.getRight() + 1;
+				}
+			}
 		}
 		if (s.charAt(3) == '1') {
 			this.x += 4 + (9 - this.hp) / 2;
+			for(ServerBlock b : blocks) {
+				if(b.checkCollision(x, y) == 1) {
+					this.x = b.getLeft() - 41;
+				}
+			}
 		}
 		if (s.charAt(4) == '1') {
 			this.firing = true;

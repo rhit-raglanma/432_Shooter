@@ -19,6 +19,8 @@ public class SpaceShip extends Sprite {
     private int hitBy;
     
     private int bdx, bdy;
+    
+    private String collision;
 
     public SpaceShip(int x, int y) {
         super(x, y);
@@ -29,11 +31,25 @@ public class SpaceShip extends Sprite {
         this.hitbox = new Rectangle(x, y, 40, 40);
         this.hit = false;
         
+        this.collision = "";
+        
         initSpaceShip();
         
         
     }
 
+    public void setCollision(String s) {
+    	this.collision = s;
+    }
+    
+    public int getdx() {
+    	return this.dx;
+    }
+    
+    public int getdy() {
+    	return this.dy;
+    }
+    
     private void initSpaceShip() {
     	
 

@@ -36,6 +36,8 @@ public class Board extends JPanel implements ActionListener {
     
     private ArrayList<Missile> removeMissiles;
     
+    private Block[] blockList;
+    
     public Board() throws Exception {
     	
 //    	String thisIPString = InetAddress.getLocalHost().getHostAddress();
@@ -99,9 +101,13 @@ public class Board extends JPanel implements ActionListener {
         setFocusable(true);
         
         shipList = new SpaceShip[10];
+        blockList = new Block[2];
 
         //spaceShip = new SpaceShip(ICRAFT_X, ICRAFT_Y);
         //otherShip = new SpaceShip(-100, -100);
+        blockList[0] = new Block(250, 350, 100, 100);
+        blockList[1] = new Block(650, 350, 100, 100);
+        
         
         for (int i = 0; i < 10; i++) {
         	shipList[i] = new SpaceShip(900, 900);
@@ -156,6 +162,12 @@ public class Board extends JPanel implements ActionListener {
 
             missiles.addAll(shipList[i].getMissiles());
         	
+        }
+        
+        for(Block b : blockList) {
+        	g2d.setColor(Color.LIGHT_GRAY);
+        	b.draw(g2d);
+        	g2d.setColor(Color.white);
         }
         
 //        g2d.fillOval(spaceShip.getX(), spaceShip.getY(), 40, 40);
@@ -215,7 +227,11 @@ public class Board extends JPanel implements ActionListener {
     					m.setVisible(false);
     				}
     			}
+    			for(Block b : blockList) {
+    				b.checkMissileCollision(m);
+    			}
     		}
+    		
 //    		if (m.getHitbox().intersects(shipList[this.player].getHitbox())) {
 //    			shipList[this.player].setHit(true);
 //    			
@@ -353,8 +369,17 @@ public class Board extends JPanel implements ActionListener {
 				shipList[i].setHit(true);
 			}
 			
-			shipList[i].setLocation(x, y);
-			
+			boolean coll = false;
+			for(Block b : blockList) {
+				if(!coll) {
+					coll = b.checkPlayerCollision(shipList[i]);
+				} else {
+					b.checkPlayerCollision(shipList[i]);
+				}
+    		}
+			if(!coll) {
+				shipList[i].setLocation(x, y);
+			}
 //			if (i == this.player) {
 //				System.out.println(x + " " + y);
 //			}
