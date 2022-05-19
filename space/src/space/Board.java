@@ -137,9 +137,17 @@ public class Board extends JPanel implements ActionListener {
         
         for (int i = 0; i < 10; i++) {
         	
-        	g2d.setColor(Color.white);
+        	//g2d.setColor(Color.white);
         	if (shipList[i].getHit()) {
-        		g2d.setColor(Color.yellow);
+        		g2d.setColor(Color.white);
+        	} else {
+        		if (shipList[i].getHP() > 6 ) {
+        			g2d.setColor(Color.green);
+        		} else if (shipList[i].getHP() < 4) {
+        			g2d.setColor(Color.red);
+        		} else {
+        			g2d.setColor(Color.yellow);
+        		}
         	}
         	g2d.fillOval(shipList[i].getX(), shipList[i].getY(), 40, 40);
         	g2d.drawString(shipList[i].getHP() + "", shipList[i].getX(), shipList[i].getY());
