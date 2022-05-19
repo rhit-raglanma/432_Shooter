@@ -16,12 +16,14 @@ public class SpaceShip extends Sprite {
     private Rectangle hitbox;
     private boolean hit;
     private int hp;
+    private int hitBy;
     
     private int bdx, bdy;
 
     public SpaceShip(int x, int y) {
         super(x, y);
         
+        this.hitBy = 0;
         this.hp = 9;
         this.firing = false;
         this.hitbox = new Rectangle(x, y, 40, 40);
@@ -96,6 +98,8 @@ public class SpaceShip extends Sprite {
 		move = move.concat(String.format("%03d", this.bdx));
 		move = move.concat(String.format("%03d", this.bdy));
 		
+		move = move.concat(Integer.toString(this.hitBy));
+		
 		return move;
 	}
     
@@ -105,6 +109,14 @@ public class SpaceShip extends Sprite {
     
     public int getHP() {
     	return this.hp;
+    }
+    
+    public int getHitBy() {
+    	return this.hitBy;
+    }
+    
+    public void setHitBy(int i) {
+    	this.hitBy = i;
     }
     
     public void setDirection(int bx, int by) {

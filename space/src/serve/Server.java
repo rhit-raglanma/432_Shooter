@@ -17,7 +17,7 @@ public class Server {
 		
 		DatagramSocket ds = new DatagramSocket(6000);
 		
-		byte[] b1 = new byte[25];
+		byte[] b1 = new byte[26];
 		
 		String[] ips = new String[10];
 		
@@ -120,6 +120,8 @@ public class Server {
 				}
 			}
 			
+			int hitBy = Integer.parseInt(str.substring(13, 14));
+			
 			
 			//X,Y
 			
@@ -148,7 +150,13 @@ public class Server {
 				players.get(p).by = 0;
 				players.get(p).hp = 9;
 				
+				players.get(hitBy).hp = 9;
+				
 				playerCountArray[p] = 0;
+				
+				
+				
+				//players.get(index)
 				
 				InetAddress ia = InetAddress.getByName(ips[p]);
 				

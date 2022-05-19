@@ -181,12 +181,21 @@ public class Board extends JPanel implements ActionListener {
         repaint();
     }
     
-    private void collissionCheck(List<Missile> missiles) {
-    	for (Missile m: missiles) {
-    		if (m.getHitbox().intersects(shipList[this.player].getHitbox())) {
-    			shipList[this.player].setHit(true);
-    			
+    private void collissionCheck() {
+    	
+    	
+    	for (int i = 0; i < 10; i++) {
+    		
+    		for (Missile m: shipList[i].getMissiles()) {
+    			if (m.getHitbox().intersects(shipList[this.player].getHitbox())) {
+        			shipList[this.player].setHit(true);
+        			shipList[this.player].setHitBy(i);
+        		}
     		}
+//    		if (m.getHitbox().intersects(shipList[this.player].getHitbox())) {
+//    			shipList[this.player].setHit(true);
+//    			
+//    		}
     	}
     }
     
@@ -232,7 +241,7 @@ public class Board extends JPanel implements ActionListener {
             }
         }
         
-        collissionCheck(missiles);
+        collissionCheck();
     }
 
     private void updateSpaceShip() throws Exception {
@@ -263,7 +272,7 @@ public class Board extends JPanel implements ActionListener {
     		
     	} 
     	
-    	byte[] b1 = new byte[150];
+    	byte[] b1 = new byte[160];
 		DatagramPacket dp1 = new DatagramPacket(b1, b1.length);
     	
 		byte[] fb = s.getBytes();
