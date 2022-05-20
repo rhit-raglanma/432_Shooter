@@ -379,9 +379,9 @@ public class Board extends JPanel implements ActionListener {
 					b.checkPlayerCollision(shipList[i]);
 				}
     		}
-			if(!coll) {
-				shipList[i].setLocation(x, y);
-			}
+			//if(!coll) {
+			shipList[i].setLocation(x, y);
+			//}
 //			if (i == this.player) {
 //				System.out.println(x + " " + y);
 //			}
